@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <meta charset="UTF-8">
+        <title style="text-align: center">Pass Word Generator</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/main.css') }}"/>
+    </head>
+    <div class="container-fluid" style="width:1400px" id="main">
+        <div class="row">
+            <body style="text-align:center; background-color:grey;">
+                <div style="width: 400px" class="card border-dark mb-3 mx-auto" id="card-1">
+                    <div class="card-header">Password Generator</div>
+                    <form action="." method="post" id="password_form" >
+                        <div class="card-body">
+                            <label for="letters">Amount of Letters in Password</label>
+                            <input type="number" id="letters" name="letters" max="10" min="0" required>
+                        </div>
+                        <div class="card-body">
+                            <label for="numbers">Amount of Numbers in Password</label>
+                            <input type="number" id="numbers" name="numbers" max="10" min="0" required>
+                        </div>
+                        <div class="card-body">
+                            <label for="characters">Amount of Characters in Password</label>
+                            <input type="number" id="characters" name="characters" max="10" min="0" required>
+                        </div>
+                        <div class="card-body">
+                            <input type="submit" value="Generate" class="button">
+                        </div>
+                        <div>
+                            <h4 class="footer">Password</h4>
+                            {% if password|length != 0 %}
+                            <p>{{ password }}</p>
+                            {% else %}
+                            <br></br>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+                    <div style="width: 700px;"
+                         class="card border-dark mb-3 mx-auto" id="card-2">
+                        <div class="card-header">Password Database</div>
+                        <div class="card-body mx-auto" style="max-height: 400px;overflow:auto;">
+                           <table align="center" class="table table-hover table-dark" id="password_table" style="width:650px
+                           ;height:50px">
+                               <tr>
+                                   <th scope="col">ID</th>
+                                   <th scope="col">Passwords</th>
+                                   <th scope="col">Date Created</th>
+                                   <th scope="col" class="delete"></th>
+                               </tr>
+                               {%for query in db_query_all%}
+                               <tr>
+                                   <td colspan="1" style="vertical-align: middle">{{query.id}}</td>
+                                   <td colspan="1" style="vertical-align: middle">{{query.password}}</td>
+                                   <td colspan="1" style="vertical-align: middle">{{query.date}}</td>
+                                   <td colspan="1" style="vertical-align: middle">
+                                       <form action="{{url_for('delete_pass', id=query.id)}}" method="post">
+                                           <input type="hidden" name="_method" value="DELETE">
+                                           <input type="submit" value="Delete" class="button button2">
+                                       </form>
+                                   </td>
+                               </tr>
+                               {% endfor %}
+                           </table>
+                            <caption style="text-align:center">List of Previous Passwords</caption>
+                        </div>
+                    </div>
+                <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+                        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+                        crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                        crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                        crossorigin="anonymous"></script>
+            </body>
+        </div>
+    </div>
+</html>
