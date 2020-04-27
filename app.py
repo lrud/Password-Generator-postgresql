@@ -20,6 +20,7 @@ db = SQLAlchemy(app)
 
 # creating the table schema in database 'password_gen
 class Passwords(db.Model):
+    __tablename__= "passwords"
     id = db.Column(db.Integer, primary_key=True)
     password = db.Column(db.String(30), unique=True)
     date = db.Column(db.DateTime, default=db.func.current_timestamp())
