@@ -9,7 +9,7 @@ import datetime
 app = Flask(__name__)
 
 # configuring the connection to postgresql database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/password_gen'
+app.config['DATABASE_URL'] = 'postgresql://localhost/password_gen'
 db = SQLAlchemy(app)
 # generating secret key - will be used later
 # SECRET_KEY = os.urandom(32)
