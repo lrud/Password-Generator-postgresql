@@ -12,7 +12,7 @@ app = Flask(__name__)
 # app.config['DATABASE_URL'] = 'postgres://hzimzwnodcjnlg:b7d3f5287994c904922a28b91a35f48b9ca966791bc454398bc6412fb214d620@ec2-52-6-143-153.compute-1.amazonaws.com:5432/d3kb2tqikr63h8'
 SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URL')
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 # generating secret key - will be used later
 # SECRET_KEY = os.urandom(32)
 # app.config['SECRET_KEY'] = SECRET_KEY
